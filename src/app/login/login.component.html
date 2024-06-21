@@ -1,0 +1,43 @@
+<!-- login.component.html -->
+<div class="container">
+  <div *ngIf="isLoginMode; else createMode">
+    <form (ngSubmit)="login()">
+      <h2>Entrar</h2>
+      <div>
+        <label for="username">Usuário</label>
+        <input type="text" id="username" [(ngModel)]="username" name="username" required>
+      </div>
+      <div>
+        <label for="password">Senha</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required>
+      </div>
+      <button type="submit">Acessar</button>
+      <p class="error-message">{{ errorMessage }}</p>
+      <p>Ainda não tem uma conta? <a (click)="toggleMode()">Cadastre-se</a></p>
+    </form>
+  </div>
+
+  <ng-template #createMode>
+    <form (ngSubmit)="createUser()">
+      <h2>Cadastro</h2>
+      <div>
+        <label for="username">Usuário</label>
+        <input type="text" id="username" [(ngModel)]="username" name="username" required>
+      </div>
+      <div>
+        <label for="password">Senha</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required>
+      </div>
+      <div>
+        <label for="role">Função</label>
+        <select id="role" [(ngModel)]="role" name="role">
+          <option value="user">Usuário</option>
+          <option value="admin">Administrador</option>
+        </select>
+      </div>
+      <button type="submit">Criar Conta</button>
+      <p class="error-message">{{ errorMessage }}</p>
+      <p>Já tem uma conta? <a (click)="toggleMode()">Acesse Agora</a></p>
+    </form>
+  </ng-template>
+</div>

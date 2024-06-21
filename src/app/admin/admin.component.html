@@ -1,0 +1,22 @@
+<!-- admin.component.html -->
+
+<div class="admin-container">
+  <h2>Lista de Vagas</h2>
+  
+  <form class="job-form" (ngSubmit)="addJob()">
+    <h3>Adicionar Nova Vaga</h3>
+    <input type="text" placeholder="Título"  name="title" required>
+    <textarea placeholder="Descrição"  name="description" required></textarea>
+    <input type="text" placeholder="Requisitos"  name="requirements" required>
+    <button type="submit">Adicionar Vaga</button>
+  </form>
+  
+  <div *ngFor="let job of jobs">
+    <div class="job-item">
+      <h4>{{ job.title }}</h4>
+      <p>{{ job.description }}</p>
+      <p><strong>Requisitos:</strong> {{ job.requirements }}</p>
+      <button (click)="deleteJob(job.id)">Excluir</button>
+    </div>
+  </div>
+</div>

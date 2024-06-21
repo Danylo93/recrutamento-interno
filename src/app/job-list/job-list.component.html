@@ -1,0 +1,12 @@
+<!-- job-list.component.html -->
+
+<div class="job-list-container">
+  <ul class="job-list">
+    <li class="job-item" *ngFor="let job of jobs">
+      <h3 class="job-title">{{ job.title }}</h3>
+      <p class="job-description">{{ job.description }}</p>
+      <p class="job-requirements"><strong>Requisitos:</strong> {{ job.requirements }}</p>
+      <a class="job-apply-button">Aplicar</a>
+    </li>
+  </ul>
+</div>
