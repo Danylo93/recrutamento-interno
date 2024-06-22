@@ -1,34 +1,48 @@
 // job.service.ts
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
-  private apiUrl = 'http://localhost:8081/api/jobs';
+  private jobs = [
+    { id: 1, title: 'Desenvolvedor Frontend', description: 'Desenvolvimento de interfaces web.', requirements: 'Angular, TypeScript' },
+    { id: 2, title: 'Desenvolvedor Backend', description: 'Desenvolvimento de APIs.', requirements: 'Node.js, Express' },
+    { id: 3, title: 'Analista de QA', description: 'Garantia de qualidade de software.', requirements: 'Testes automatizados, Selenium' }
+  ];
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   getJobs(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return of(this.jobs);
   }
 
   getJobById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    const job = this.jobs.find(job => job.id === id);
+    return of(job);
   }
 
   addJob(job: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, job);
+    job.id = this.jobs.length + 1;
+    this.jobs.push(job);
+    return of(job);
   }
 
   updateJob(id: number, updatedJob: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, updatedJob);
+    const index = this.jobs.findIndex(job => job.id === id);
+    if (index !== -1) {
+      this.jobs[index] = { ...this.jobs[index], ...updatedJob };
+    }
+    return of(this.jobs[index]);
   }
 
   deleteJob(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    const index = this.jobs.findIndex(job => job.id === id);
+    if (index !== -1) {
+      this.jobs.splice(index, 1);
+    }
+    return of(null);
   }
 }

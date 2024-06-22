@@ -1,0 +1,45 @@
+/* Estilos para o componente de Minhas Candidaturas */
+
+.my-applications-container {
+  margin-top: 20px;
+}
+
+.my-applications-container h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.my-applications-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.application-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.application-item h3 {
+  margin-top: 0;
+}
+
+.application-item p {
+  margin-bottom: 5px;
+}
+
+/* Estilo para mensagem de erro */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Estilo para mensagem de sucesso */
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}

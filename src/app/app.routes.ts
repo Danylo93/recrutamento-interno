@@ -5,9 +5,10 @@ import { JobListComponent } from './job-list/job-list.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
 import { JobApplyComponent } from './job-apply/job-apply.component';
 import { AdminComponent } from './admin/admin.component';
-import { CandidatePanelComponent } from './candidate-pane/candidate-pane.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './admin/auth.guard';
+import { CandidatePanelComponent } from './candidate-panel/candidate-panel.component';
+import { CandidateEvaluationComponent } from './evaluation-candidate/candidate-evaluation.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'jobs/:id', component: JobDetailComponent, canActivate: [AuthGuard]},
   { path: 'apply/:id', component: JobApplyComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-  { path: 'candidate-panel', component: CandidatePanelComponent, canActivate: [AuthGuard] }
+  { path: 'candidate-panel', component: CandidatePanelComponent, canActivate: [AuthGuard] },
+  { path: 'evaluation-candidate/:id', component: CandidateEvaluationComponent },
 ];

@@ -5,9 +5,9 @@
   
   <form class="job-form" (ngSubmit)="addJob()">
     <h3>Adicionar Nova Vaga</h3>
-    <input type="text" placeholder="Título"  name="title" required>
-    <textarea placeholder="Descrição"  name="description" required></textarea>
-    <input type="text" placeholder="Requisitos"  name="requirements" required>
+    <input type="text" placeholder="Título" name="title" [(ngModel)]="newJob.title" required>
+    <textarea placeholder="Descrição" name="description" [(ngModel)]="newJob.description" required></textarea>
+    <input type="text" placeholder="Requisitos" name="requirements" [(ngModel)]="newJob.requirements" required>
     <button type="submit">Adicionar Vaga</button>
   </form>
   
@@ -19,4 +19,7 @@
       <button (click)="deleteJob(job.id)">Excluir</button>
     </div>
   </div>
+
+  <!-- Botão Flutuante de Logout -->
+  <button class="floating-logout-btn" (click)="logout()">Logout</button>
 </div>

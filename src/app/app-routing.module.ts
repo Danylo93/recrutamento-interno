@@ -10,12 +10,13 @@ import { JobListComponent } from './job-list/job-list.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
 import { JobApplyComponent } from './job-apply/job-apply.component';
 import { AdminComponent } from './admin/admin.component';
-import { CandidatePanelComponent } from './candidate-pane/candidate-pane.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './admin/auth.guard';
 import { AppComponent } from './app.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { RoleGuard } from './admin/role.guard';
+import { CandidatePanelComponent } from './candidate-panel/candidate-panel.component';
+import { CandidateEvaluationComponent } from './evaluation-candidate/candidate-evaluation.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ADMIN'] }},
       { path: 'candidate-panel', component: CandidatePanelComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['USER', 'ADMIN'] } },
       { path: 'access-denied', component: AccessDeniedComponent },
+      { path: 'evaluation-candidate/:id', component: CandidateEvaluationComponent },
       { path: '**', redirectTo: '' }
     ]
   }
@@ -45,8 +47,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CommonModule
-    
+    CommonModule,
+    HeaderComponent
   ],
   exports: [
     RouterModule,

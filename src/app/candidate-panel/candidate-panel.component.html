@@ -1,0 +1,10 @@
+<div class="my-applications-container">
+  <h2>Minhas Candidaturas</h2>
+  <ul>
+    <li *ngFor="let application of applications" class="application-item">
+      <h3>{{ application.jobTitle }}</h3>
+      <p>Status: {{ application.status }}</p>
+      <p>Feedback: {{ application.feedback }}</p>
+    </li>
+  </ul>
+</div>
