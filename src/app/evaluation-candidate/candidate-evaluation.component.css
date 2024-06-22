@@ -1,62 +1,74 @@
 /* candidate-evaluation.component.css */
 
-/* Estilo para a lista de candidatos */
+.filters-container {
+  margin-bottom: 20px;
+}
+
+.filter-input {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-button:hover {
+  background-color: #0069d9;
+}
+
 .candidates-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .candidates-list-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .candidates-list-item h3 {
-    margin-top: 0;
-  }
-  
-  .candidates-list-item p {
-    margin-bottom: 5px;
-  }
-  
-  /* Estilo para os filtros */
-  .filters-container {
-    margin-bottom: 20px;
-  }
-  
-  .filter-input {
-    padding: 8px;
-    width: 200px;
-    margin-right: 10px;
-  }
-  
-  .filter-button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .filter-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilo para mensagens de erro */
-  .error-message {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  /* Estilo para mensagem de sucesso */
-  .success-message {
-    color: green;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
+  list-style-type: none;
+  padding: 0;
+}
+
+.candidates-list-item {
+  background-color: #590668; /* Cor de fundo lilás */
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.candidates-list-item h3 {
+  color: #ffffff; /* Texto branco */
+  margin-bottom: 5px;
+}
+
+.candidates-list-item p {
+  color: #ffffff; /* Texto branco */
+  margin: 5px 0;
+}
+
+.floating-logout-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.floating-evaluation-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}

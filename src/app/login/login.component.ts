@@ -50,12 +50,12 @@ export class LoginComponent {
             this.router.navigate(['/']);
           }
         } else {
-          this.errorMessage = 'Login failed';
+          this.errorMessage = 'Login Falhou';
         }
       },
       error => {
         console.error('Error during login:', error);
-        this.errorMessage = 'Error during login. Please try again.';
+        this.errorMessage = 'Usuário ou Senha Inválidos.';
       }
     );
   }
@@ -67,14 +67,14 @@ export class LoginComponent {
         .subscribe(
           success => {
             if (success) {
-              this.errorMessage = 'User created successfully. You can now log in.';
+              this.errorMessage = 'Usuário Criado com sucesso, você já pode fazer login';
               this.isLoginMode = true;
             } else {
-              this.errorMessage = 'Username already exists. Please choose another.';
+              this.errorMessage = 'Usuário já existe. Por favor escolha outro.';
             }
           },
           error => {
-            this.errorMessage = 'Error creating user. Please try again.';
+            this.errorMessage = 'Erro ao criar usuário, tente novamente.';
             console.error('Error creating user:', error);
           }
         );

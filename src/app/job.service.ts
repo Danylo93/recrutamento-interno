@@ -13,6 +13,11 @@ export class JobService {
     { id: 3, title: 'Analista de QA', description: 'Garantia de qualidade de software.', requirements: 'Testes automatizados, Selenium' }
   ];
 
+  private applications = [
+    { id: 1, jobId: 1, jobTitle: 'Desenvolvedor Frontend', status: 'Pendente', feedback: '' },
+    { id: 2, jobId: 2, jobTitle: 'Desenvolvedor Backend', status: 'Aceito', feedback: 'Ótimo candidato!' }
+  ];
+
   constructor() { }
 
   getJobs(): Observable<any[]> {
@@ -44,5 +49,22 @@ export class JobService {
       this.jobs.splice(index, 1);
     }
     return of(null);
+  }
+
+  getApplicationsForJob(jobId: number): Observable<any[]> {
+    const applications = this.applications.filter(app => app.jobId === jobId);
+    return of(applications);
+  }
+
+  applyForJob(jobId: number): Observable<any> {
+    const newApplication = {
+      id: this.applications.length + 1,
+      jobId: jobId,
+      jobTitle: this.jobs.find(job => job.id === jobId)?.title || 'Vaga não encontrada',
+      status: 'Pendente',
+      feedback: ''
+    };
+    this.applications.push(newApplication);
+    return of(newApplication);
   }
 }

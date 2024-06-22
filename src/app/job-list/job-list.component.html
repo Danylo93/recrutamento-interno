@@ -1,12 +1,14 @@
-<!-- job-list.component.html -->
-
 <div class="job-list-container">
   <ul class="job-list">
     <li class="job-item" *ngFor="let job of jobs">
       <h3 class="job-title">{{ job.title }}</h3>
       <p class="job-description">{{ job.description }}</p>
       <p class="job-requirements"><strong>Requisitos:</strong> {{ job.requirements }}</p>
-      <a class="job-apply-button">Aplicar</a>
+      <!-- Botão ou link para aplicar para a vaga -->
+      <button class="job-apply-button" (click)="applyForJob(job)">Aplicar</button>
     </li>
   </ul>
+
+  <!-- Botão flutuante para voltar à página inicial -->
+  <button class="floating-back-btn" (click)="goToHomePage()">Voltar à Página Inicial</button>
 </div>

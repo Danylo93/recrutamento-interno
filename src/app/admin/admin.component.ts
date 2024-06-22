@@ -1,10 +1,10 @@
 // admin.component.ts
 
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { JobService } from '../job.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 
 @Component({
   imports: [ FormsModule, CommonModule ],
@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class AdminComponent implements OnInit {
   jobs: any[] = [];
   newJob = { title: '', description: '', requirements: '' };
+  editingJob: any = null;
 
   constructor(private jobService: JobService, private router: Router) { }
 
@@ -30,26 +31,44 @@ export class AdminComponent implements OnInit {
   }
 
   addJob(): void {
-    if (this.newJob.title && this.newJob.description && this.newJob.requirements) {
-      this.jobService.addJob(this.newJob).subscribe(() => {
-        this.loadJobs();
-        this.newJob = { title: '', description: '', requirements: '' }; // Reset form
+    this.jobService.addJob(this.newJob).subscribe(job => {
+      this.jobs.push(job);
+      this.newJob = { title: '', description: '', requirements: '' };
+    });
+  }
+
+  editJob(job: any): void {
+    this.editingJob = { ...job };
+  }
+
+  updateJob(): void {
+    if (this.editingJob) {
+      this.jobService.updateJob(this.editingJob.id, this.editingJob).subscribe(updatedJob => {
+        const index = this.jobs.findIndex(job => job.id === updatedJob.id);
+        if (index !== -1) {
+          this.jobs[index] = updatedJob;
+        }
+        this.editingJob = null;
       });
-    } else {
-      alert('Por favor, preencha todos os campos.');
     }
+  }
+
+  cancelEdit(): void {
+    this.editingJob = null;
   }
 
   deleteJob(id: number): void {
     this.jobService.deleteJob(id).subscribe(() => {
-      this.loadJobs();
+      this.jobs = this.jobs.filter(job => job.id !== id);
     });
   }
 
   logout(): void {
-    // Lógica para deslogar o usuário (limpar token, redirecionar para a página de login, etc.)
-    // Por exemplo:
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  navigateToEvaluation(): void {
+    this.router.navigate(['/evaluation-candidate']);
   }
 }

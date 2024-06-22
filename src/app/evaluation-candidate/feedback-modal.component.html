@@ -1,0 +1,13 @@
+<!-- feedback-modal.component.html -->
+
+<div class="modal">
+    <div class="modal-content">
+      <h2>Avaliar Candidato - {{ candidate.name }}</h2>
+      <textarea [(ngModel)]="feedback" placeholder="Digite seu feedback..." rows="4"></textarea>
+      <div class="modal-buttons">
+        <button (click)="onSubmit()">Enviar</button>
+        <button (click)="closeModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+  

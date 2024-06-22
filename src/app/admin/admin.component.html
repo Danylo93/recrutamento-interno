@@ -1,25 +1,38 @@
 <!-- admin.component.html -->
 
 <div class="admin-container">
-  <h2>Lista de Vagas</h2>
+ 
   
   <form class="job-form" (ngSubmit)="addJob()">
-    <h3>Adicionar Nova Vaga</h3>
+    <h2>Adicionar Nova Vaga</h2>
     <input type="text" placeholder="Título" name="title" [(ngModel)]="newJob.title" required>
     <textarea placeholder="Descrição" name="description" [(ngModel)]="newJob.description" required></textarea>
     <input type="text" placeholder="Requisitos" name="requirements" [(ngModel)]="newJob.requirements" required>
     <button type="submit">Adicionar Vaga</button>
   </form>
-  
+  <h3>Lista de Vagas</h3>
   <div *ngFor="let job of jobs">
     <div class="job-item">
       <h4>{{ job.title }}</h4>
       <p>{{ job.description }}</p>
       <p><strong>Requisitos:</strong> {{ job.requirements }}</p>
+      <button (click)="editJob(job)">Editar</button>
       <button (click)="deleteJob(job.id)">Excluir</button>
     </div>
   </div>
 
+  <!-- Formulário de Edição de Vaga -->
+  <form *ngIf="editingJob" class="job-form" (ngSubmit)="updateJob()">
+    <h3>Editar Vaga</h3>
+    <input type="text" placeholder="Título" name="title" [(ngModel)]="editingJob.title" required>
+    <textarea placeholder="Descrição" name="description" [(ngModel)]="editingJob.description" required></textarea>
+    <input type="text" placeholder="Requisitos" name="requirements" [(ngModel)]="editingJob.requirements" required>
+    <button type="submit">Atualizar Vaga</button>
+    <button type="button" (click)="cancelEdit()">Cancelar</button>
+  </form>
+
   <!-- Botão Flutuante de Logout -->
   <button class="floating-logout-btn" (click)="logout()">Logout</button>
+  <!-- Botão Flutuante para Avaliação de Candidatos -->
+  <button class="floating-evaluation-btn" (click)="navigateToEvaluation()">Avaliação de Candidatos</button>
 </div>

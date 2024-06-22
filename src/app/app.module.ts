@@ -11,7 +11,6 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
-import { JobApplyComponent } from './job-apply/job-apply.component';
 import { AuthGuard } from './admin/auth.guard';
 import { ApplicationService } from './application.service';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
@@ -19,6 +18,7 @@ import { AuthService } from './auth.service';
 import { RoleGuard } from './admin/role.guard';
 import { CandidatePanelComponent } from './candidate-panel/candidate-panel.component';
 import { HeaderComponent } from './header/header.component';
+import { ApplyJobComponent } from './job-apply/apply-job.component';
 
 
 @NgModule({
@@ -26,14 +26,12 @@ import { HeaderComponent } from './header/header.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    JobListComponent,
     JobDetailComponent,
-    JobApplyComponent,
     AdminComponent,
-    HeaderComponent,
     CandidatePanelComponent,
     AccessDeniedComponent,
-    AdminComponent
+    AdminComponent, 
+    ApplyJobComponent,
   ],
   imports: [
     BrowserModule,

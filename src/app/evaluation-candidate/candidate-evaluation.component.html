@@ -1,18 +1,24 @@
 <!-- candidate-evaluation.component.html -->
 
 <div class="filters-container">
-    <input class="filter-input" type="text" placeholder="Requisito" [(ngModel)]="filters.requirement">
-    <input class="filter-input" type="text" placeholder="Experiência" [(ngModel)]="filters.experience">
-    <button class="filter-button" >Aplicar Filtros</button>
-  </div>
-  
-  <ul class="candidates-list">
-    <li *ngFor="let candidate of candidates" class="candidates-list-item">
-      <h3>{{ candidate.name }}</h3>
-      <p>{{ candidate.email }}</p>
-      <p>{{ candidate.phone }}</p>
-    </li>
-  </ul>
-  
- 
-  
+  <input class="filter-input" type="text" placeholder="Requisito" [(ngModel)]="filters.requirement">
+  <button class="filter-button" (click)="applyFilters()">Aplicar Filtros</button>
+</div>
+
+<ul class="candidates-list">
+  <li *ngFor="let candidate of candidates" class="candidates-list-item" (click)="evaluateCandidate(candidate)">
+    <h3>{{ candidate.name }}</h3>
+    <p>Experiência: {{ candidate.experience }}</p>
+    <p>Requisitos Atendidos: {{ candidate.requirementsMet }}</p>
+  </li>
+</ul>
+
+<!-- Modal para avaliação de candidato -->
+<app-feedback-modal *ngIf="showModal" [candidate]="selectedCandidate"
+                    (submitFeedback)="submitFeedback($event)"
+                    (closeModalEvent)="closeModal()">
+</app-feedback-modal>
+
+<!-- Botão de voltar e logout -->
+<button class="floating-logout-btn" (click)="logout()">Logout</button>
+<button class="floating-evaluation-btn" (click)="goBack()">Voltar</button>

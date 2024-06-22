@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color:  #4a148c; /* Cor de fundo */
+  background-color: #4a148c; /* Cor de fundo */
 }
 
 form {
@@ -21,6 +21,7 @@ h2 {
   font-size: 1.5rem;
   margin-bottom: 20px;
   color: #333333; /* Cor do título */
+  text-align: center; /* Centralizar o título */
 }
 
 label {
@@ -45,6 +46,8 @@ button {
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 4px;
+  width: 100%; /* Largura do botão */
+  font-size: 1rem;
 }
 
 button:hover {
@@ -54,6 +57,11 @@ button:hover {
 .error-message {
   color: #dc3545; /* Cor do texto de mensagem de erro */
   margin-top: 10px;
+  text-align: center; /* Centralizar a mensagem de erro */
+}
+
+p {
+  text-align: center; /* Centralizar os parágrafos */
 }
 
 a {

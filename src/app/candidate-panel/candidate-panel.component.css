@@ -1,45 +1,45 @@
-/* Estilos para o componente de Minhas Candidaturas */
+/* my-applications.component.css */
 
 .my-applications-container {
-  margin-top: 20px;
-}
-
-.my-applications-container h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.my-applications-container ul {
-  list-style-type: none;
-  padding: 0;
+  position: relative;
+  padding: 20px;
 }
 
 .application-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  background-color: #000; 
+  color: white; /* Texto em branco */
+  padding: 20px;
+  margin-bottom: 10px;
   border-radius: 5px;
 }
 
-.application-item h3 {
-  margin-top: 0;
+h2 {
+  color: white; /* Texto em branco para o título */
 }
 
-.application-item p {
-  margin-bottom: 5px;
+.floating-logout-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
-/* Estilo para mensagem de erro */
-.error-message {
-  color: red;
-  font-weight: bold;
-  margin-top: 10px;
+.floating-logout-btn:hover {
+  background-color: #c82333;
 }
 
-/* Estilo para mensagem de sucesso */
-.success-message {
-  color: green;
-  font-weight: bold;
-  margin-top: 10px;
+.open-jobs-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
