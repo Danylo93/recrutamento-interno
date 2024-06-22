@@ -11,19 +11,31 @@ import { JobDetailComponent } from './job-detail/job-detail.component';
 import { JobApplyComponent } from './job-apply/job-apply.component';
 import { AdminComponent } from './admin/admin.component';
 import { CandidatePanelComponent } from './candidate-pane/candidate-pane.component';
-import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './admin/auth.guard';
+import { AppComponent } from './app.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { RoleGuard } from './admin/role.guard';
+
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: '', component: HeaderComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
- { path: 'jobs', component: JobListComponent },
-  { path: 'jobs/:id', component: JobDetailComponent },
-  { path: 'apply/:id', component: JobApplyComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'candidate-panel', component: CandidatePanelComponent }
+  {
+    path: '',
+    component: HeaderComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'jobs', component: JobListComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['USER', 'ADMIN'] }},
+      { path: 'jobs/:id', component: JobDetailComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['USER', 'ADMIN'] } },
+      { path: 'apply/:id', component: JobApplyComponent,canActivate: [AuthGuard, RoleGuard], data: { roles: ['USER', 'ADMIN'] } },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['ADMIN'] }},
+      { path: 'candidate-panel', component: CandidatePanelComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['USER', 'ADMIN'] } },
+      { path: 'access-denied', component: AccessDeniedComponent },
+      { path: '**', redirectTo: '' }
+    ]
+  }
 ];
 
 @NgModule({
