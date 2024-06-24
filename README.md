@@ -1,27 +1,78 @@
-# RecrutamentoInterno
+Para criar um README.md no estilo padrão do GitHub, aqui está um exemplo estruturado com base nas funcionalidades e detalhes que você mencionou sobre o seu projeto de recrutamento interno:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
+---
 
-## Development server
+# Sistema de Recrutamento Interno - Backend
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Autenticação e Autorização:** Sistema seguro de autenticação para usuários com gestão de sessões usando tokens JWT.
 
-## Build
+- **Cadastro de Vagas:** Administração de vagas com título, descrição detalhada e requisitos necessários. Atualização e exclusão de vagas.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Candidatura a Vagas:** Candidatura a vagas específicas com notificações automáticas para candidatos e responsáveis.
 
-## Running unit tests
+## Funcionalidades Bônus
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Painel do Candidato:** Acompanhamento do status das candidaturas e recebimento de feedbacks automáticos.
 
-## Running end-to-end tests
+- **Avaliação de Candidatos:** Sistema para avaliação de candidatos por responsáveis de vaga, incluindo filtros de requisitos.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Tecnologias Utilizadas
 
-## Further help
+- **Backend:**
+  - Java com Spring Boot
+  - Spring Security, JWT
+  - Hibernate/JPA, MySQL
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Frontend:**
+  - Angular
+  - Componentes e serviços para interação com o usuário
+
+## Configuração e Instalação
+
+### Backend
+
+1. Clone o repositório do backend:
+   ```bash
+   git clone https://github.com/Danylo93/recrutamento-interno-backend.git
+   cd recrutamento-interno-backend
+   ```
+
+2. Configure o banco de dados MySQL e ajuste as configurações em `application.properties`.
+
+3. Execute o backend usando sua IDE ou via linha de comando:
+   ```bash
+   ./mvn spring-boot:run
+   ```
+
+### Frontend
+
+1. Clone o repositório do frontend:
+   ```bash
+   git clone https://github.com/Danylo93/recrutamento-interno-frontend.git
+   cd recrutamento-interno-frontend
+   ```
+
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+3. Configure o arquivo de ambiente para apontar para o backend correto.
+
+4. Inicie o servidor de desenvolvimento do Angular:
+   ```bash
+   ng serve
+   ```
+
+## Contribuição
+
+Detalhes sobre como outros desenvolvedores podem contribuir para o projeto.
+
+## Licença
+
+Este projeto está licenciado sob a [Licença XYZ](url-da-licenca).
+
+---

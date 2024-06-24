@@ -20,26 +20,19 @@ export class CandidatePanelComponent implements OnInit {
   constructor(private candidateService: CandidateService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getCandidateApplications();
-  }
-
-  getCandidateApplications(): void {
-    this.candidateService.getApplications()
-      .subscribe(
-        data => {
-          this.applications = data;
-          console.log('Applications:', this.applications);
-        },
-        error => {
-          console.error('Error fetching applications:', error);
-        }
-      );
+    this.loadApplications();
   }
 
   loadApplications(): void {
-    this.candidateService.getApplications().subscribe(data => {
-      this.applications = data;
-    });
+    this.candidateService.getApplications().subscribe(
+      (data) => {
+        this.applications = data;
+      },
+      (error) => {
+        console.error('Error loading applications:', error);
+        // Tratar erros aqui, exibir mensagem de erro na UI, etc.
+      }
+    );
   }
 
   logout(): void {

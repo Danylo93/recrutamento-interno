@@ -29,8 +29,8 @@ export class ApplyJobComponent implements OnInit {
    
   ) {
     this.applicationForm = this.fb.group({
-      name: [''],
-      email: ['']
+      candidateName: [''],
+      candidateEmail: ['']
     });
   }
 
@@ -54,7 +54,7 @@ export class ApplyJobComponent implements OnInit {
           this.candidateId = loggedInUser.id;
         } else {
           console.log("Usuario Logado >", loggedInUser)
-          console.error('Usuário não encontrado com o nome de usuário presente no token.', loggedInUser);
+          console.error('Usuário não encontrado com o nome de usuário presente no token.');
         }
       } else {
         console.error('Token não encontrado no armazenamento local.');
@@ -63,16 +63,13 @@ export class ApplyJobComponent implements OnInit {
   }
 
   apply(): void {
-    if (this.applicationForm.valid && this.candidateId) {
       this.jobService.applyForJob(this.jobId, `${this.candidateId}`, this.applicationForm.value).subscribe(response => {
         this.router.navigate(['/candidate-panel']);
         console.log('Aplicação enviada com sucesso', response);
       }, error => {
         console.error('Erro ao enviar aplicação:', error);
       });
-    } else {
-      console.error('Formulário de aplicação inválido ou ID do candidato não encontrado.');
-    }
+    
   }
    
   }

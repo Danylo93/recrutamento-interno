@@ -19,8 +19,6 @@ export class CandidateService {
   }
 
   getApplications(): Observable<any[]> {
-    // Aqui você pode modificar para pegar as candidaturas do candidato autenticado
-    // Supondo que o backend gerencie isso através do token ou alguma identificação de usuário
-    return this.http.get<any[]>(`${this.baseUrl}/candidates/${8}/applications`, { headers: this.getHeaders() });
+    return this.http.get<any[]>(`${this.baseUrl}/applications/my-applications`, { headers: this.getHeaders() });
   }
 }

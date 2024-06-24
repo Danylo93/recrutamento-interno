@@ -9,18 +9,22 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Título do Trabalho</th>
+        <th>Nome da Vaga</th>
         <th>Status</th>
         <th>Feedback</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let application of applications">
-        <td>{{ application.id }}</td>
-        <td>{{ application.jobTitle }}</td>
-        <td>{{ application.status }}</td>
-        <td>{{ application.feedback }}</td>
+        <td>{{ application.jobId  }}</td>
+        <td>{{ application.JobTitle  }}</td>
+        <td>{{ application.status  }}</td>
+        <td>{{ application.feedback  }}</td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="applications.length === 0">
+  <p>Nenhuma candidatura encontrada.</p>
 </div>

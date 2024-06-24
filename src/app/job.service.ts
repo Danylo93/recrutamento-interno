@@ -49,4 +49,9 @@ export class JobService {
     return this.http.delete<any>(`${this.baseUrl}/${id}`, { headers: this.getHeaders() });
   }
 
+  // Método para verificar se o candidato já se candidatou à vaga
+  hasApplied(jobId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/candidates/${jobId}/has-applied`, { headers: this.getHeaders() });
+  }
+
 }
