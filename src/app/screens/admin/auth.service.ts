@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { JwtHelperService } from './admin/jwt-helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class AuthService {
   private userRole: string = '';
   private apiUrl = 'http://localhost:8081/api/auth'; // Base URL dos endpoints de autenticação
 
-  constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
@@ -51,14 +50,14 @@ export class AuthService {
   }
 
   logout() {
-    this.isAuthenticated = false;
-    this.userRole = '';
-    localStorage.removeItem('token');
+    // this.isAuthenticated = false;
+    // this.userRole = '';
+    // localStorage.removeItem('token');
     this.router.navigate(['/']); // Redirecionar para a página inicial após o logout
   }
 
   isLoggedIn(): boolean {
-    return this.isAuthenticated;
+    return !!this.getToken();
   }
 
   getUserRole(): string {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FeedbackModalComponent } from './feedback-modal.component';
+import { AuthService } from '../admin/auth.service';
 
 @Component({
   selector: 'app-candidate-evaluation',
@@ -19,7 +20,7 @@ export class CandidateEvaluationComponent implements OnInit {
   selectedCandidate: any; // Candidato selecionado para avaliação
   token: string = ''; // Variável para armazenar o token
 
-  constructor(private evaluationService: EvaluationService, private router: Router) { }
+  constructor(private evaluationService: EvaluationService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || ''; // Obter token do localStorage
@@ -63,7 +64,7 @@ export class CandidateEvaluationComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 }

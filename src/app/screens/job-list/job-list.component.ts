@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobService } from '../job.service';
+import { JobService } from './job.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -26,6 +26,8 @@ export class JobListComponent implements OnInit {
   }
 
   goToHomePage(){
-
+      // Navegar para a página de vagas abertas
+      this.router.navigate(['/candidate-panel']);
+    
   }
 }

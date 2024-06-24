@@ -2,23 +2,25 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { JobService } from '../job.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from './auth.service';
+import { HeaderComponent } from "../../components/header/header.component";
+import { JobService } from '../job-list/job.service';
 
 @Component({
-  imports: [ FormsModule, CommonModule ],
-  standalone: true,
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+    standalone: true,
+    selector: 'app-admin',
+    templateUrl: './admin.component.html',
+    styleUrls: ['./admin.component.css'],
+    imports: [FormsModule, CommonModule]
 })
 export class AdminComponent implements OnInit {
   jobs: any[] = [];
   newJob = { title: '', description: '', requirements: '' };
   editingJob: any = null;
 
-  constructor(private jobService: JobService, private router: Router) { }
+  constructor(private jobService: JobService, private router: Router, private authService: AuthService) { }
 
   
 
@@ -76,7 +78,7 @@ export class AdminComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 
