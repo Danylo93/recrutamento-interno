@@ -1,30 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EvaluationService {
+  private apiUrl = 'http://localhost:8081/api/evaluations'; // Ajuste conforme necessário
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getCandidates(jobId: number, filters: any): Observable<any[]> {
-    // Simulando dados fictícios de candidatos para avaliação
-    const candidates = [
-      { id: 1, name: 'João Silva', experience: '5 anos', requirementsMet: 'Sim' },
-      { id: 2, name: 'Maria Santos', experience: '3 anos', requirementsMet: 'Sim' },
-      { id: 3, name: 'José Oliveira', experience: '7 anos', requirementsMet: 'Sim' },
-      { id: 4, name: 'Ana Souza', experience: '2 anos', requirementsMet: 'Não' }
-    ];
+  getHeaders(token: string): HttpHeaders {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
 
-    // Simular filtro básico por requisito
-    if (filters.requirement) {
-      const filteredCandidates = candidates.filter(candidate =>
-        candidate.requirementsMet.toLowerCase() === filters.requirement.toLowerCase()
-      );
-      return of(filteredCandidates);
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
     }
 
-    return of(candidates);
+    return headers;
+  }
+
+  getCandidates(jobId: number, filters: any, token: string): Observable<any[]> {
+    let params = new HttpParams().set('jobId', jobId.toString());
+
+    if (filters.requirement) {
+      params = params.set('requirement', filters.requirement.toLowerCase());
+    }
+
+    const headers = this.getHeaders(token);
+
+    return this.http.get<any[]>(`${this.apiUrl}/all`, { params, headers });
   }
 }

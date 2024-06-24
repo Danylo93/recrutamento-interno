@@ -1,70 +1,52 @@
-// job.service.ts
-
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
-  private jobs = [
-    { id: 1, title: 'Desenvolvedor Frontend', description: 'Desenvolvimento de interfaces web.', requirements: 'Angular, TypeScript' },
-    { id: 2, title: 'Desenvolvedor Backend', description: 'Desenvolvimento de APIs.', requirements: 'Node.js, Express' },
-    { id: 3, title: 'Analista de QA', description: 'Garantia de qualidade de software.', requirements: 'Testes automatizados, Selenium' }
-  ];
+  private baseUrl = 'http://localhost:8081/api/jobs';
 
-  private applications = [
-    { id: 1, jobId: 1, jobTitle: 'Desenvolvedor Frontend', status: 'Pendente', feedback: '' },
-    { id: 2, jobId: 2, jobTitle: 'Desenvolvedor Backend', status: 'Aceito', feedback: 'Ótimo candidato!' }
-  ];
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        mode: 'no-cors',
+      });
+    } else {
+      return new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+    }
+  }
 
   getJobs(): Observable<any[]> {
-    return of(this.jobs);
+    return this.http.get<any[]>(this.baseUrl, { headers: this.getHeaders() });
   }
 
   getJobById(id: number): Observable<any> {
-    const job = this.jobs.find(job => job.id === id);
-    return of(job);
+    return this.http.get<any>(`${this.baseUrl}/${id}`, { headers: this.getHeaders() });
+  }
+
+  applyForJob(jobId: number, candidateId: string, application: any): Observable<any> { // Ajuste o tipo de candidateId para string
+    return this.http.post<any>(`${this.baseUrl}/${jobId}/apply`, { candidateId, ...application }, { headers: this.getHeaders() });
   }
 
   addJob(job: any): Observable<any> {
-    job.id = this.jobs.length + 1;
-    this.jobs.push(job);
-    return of(job);
+    return this.http.post<any>(this.baseUrl, job, { headers: this.getHeaders() });
   }
 
   updateJob(id: number, updatedJob: any): Observable<any> {
-    const index = this.jobs.findIndex(job => job.id === id);
-    if (index !== -1) {
-      this.jobs[index] = { ...this.jobs[index], ...updatedJob };
-    }
-    return of(this.jobs[index]);
+    return this.http.put<any>(`${this.baseUrl}/${id}`, updatedJob, { headers: this.getHeaders() });
   }
-
+  
   deleteJob(id: number): Observable<any> {
-    const index = this.jobs.findIndex(job => job.id === id);
-    if (index !== -1) {
-      this.jobs.splice(index, 1);
-    }
-    return of(null);
+    return this.http.delete<any>(`${this.baseUrl}/${id}`, { headers: this.getHeaders() });
   }
 
-  getApplicationsForJob(jobId: number): Observable<any[]> {
-    const applications = this.applications.filter(app => app.jobId === jobId);
-    return of(applications);
-  }
-
-  applyForJob(jobId: number): Observable<any> {
-    const newApplication = {
-      id: this.applications.length + 1,
-      jobId: jobId,
-      jobTitle: this.jobs.find(job => job.id === jobId)?.title || 'Vaga não encontrada',
-      status: 'Pendente',
-      feedback: ''
-    };
-    this.applications.push(newApplication);
-    return of(newApplication);
-  }
 }

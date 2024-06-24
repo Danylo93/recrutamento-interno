@@ -1,21 +1,33 @@
-/* my-applications.component.css */
-
-.my-applications-container {
-  position: relative;
+.applications-container {
+  width: 80%;
+  margin: 0 auto;
   padding: 20px;
-}
-
-.application-item {
-  background-color: #000; 
-  color: white; /* Texto em branco */
-  padding: 20px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-  color: white; /* Texto em branco para o título */
+  text-align: center;
+  margin-bottom: 20px;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
 
 .floating-logout-btn {
   position: absolute;

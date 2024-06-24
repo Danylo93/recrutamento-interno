@@ -1,50 +1,58 @@
-/* apply-job.component.css */
-
 .apply-job-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .apply-job-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: #333333;
-  }
-  
-  .apply-job-form {
-    margin-top: 20px;
-  }
-  
-  .apply-job-form label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .apply-job-form input[type="text"],
-  .apply-job-form input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .apply-job-form button {
-    background-color: #4a148c;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .apply-job-form button:hover {
-    background-color: #5c0cbd;
-  }
-  
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.apply-job-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.apply-job-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.apply-job-form div {
+  margin-bottom: 15px;
+}
+
+.apply-job-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.apply-job-form input[type="text"],
+.apply-job-form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.apply-job-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.apply-job-form button:hover {
+  background-color: #0056b3;
+}
+
+.apply-job-form button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { JwtHelperService } from './admin/jwt-helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,24 @@ export class AuthService {
   private userRole: string = '';
   private apiUrl = 'http://localhost:8081/api/auth'; // Base URL dos endpoints de autenticação
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) { }
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
   login(username: string, password: string): Observable<boolean> {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password })
       .pipe(
@@ -48,6 +66,10 @@ export class AuthService {
     return this.userRole;
   }
 
+  get logado(): boolean {
+    return localStorage.getItem('token') ? true : false;
+  }
+
   createUser(username: string, password: string, role: string): Observable<boolean> {
     return this.http.post<any>(`${this.apiUrl}/register`, { username, password, role })
       .pipe(
@@ -57,16 +79,14 @@ export class AuthService {
       );
   }
 
-  
-
   private getDecodedToken(token: string): any {
     try {
-        return JSON.parse(atob(token.split('.')[1]));
+      return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
-        console.error('Error decoding token:', e);
-        return null;
+      console.error('Error decoding token:', e);
+      return null;
     }
-}
+  }
 
   private redirectUser(): void {
     if (this.userRole === 'ADMIN') {
@@ -78,12 +98,17 @@ export class AuthService {
 
   fetchUserRole(): Observable<string> {
     return this.http.get<any>(`${this.apiUrl}/roles`).pipe(
-        map(response => {
-            const roles = response.role; // Verifique a estrutura da resposta para obter as roles corretamente
-            this.userRole = roles.includes('ADMIN') ? 'ADMIN' : 'USER';
-            return this.userRole;
-        })
+      map(response => {
+        const roles = response.role; // Verifique a estrutura da resposta para obter as roles corretamente
+        this.userRole = roles.includes('ADMIN') ? 'ADMIN' : 'USER';
+        return this.userRole;
+      })
     );
-}
+  }
+
+  fetchUsersAll(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/users/all`, { headers: this.getHeaders() });
+  }
+
 
 }

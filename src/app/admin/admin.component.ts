@@ -20,6 +20,8 @@ export class AdminComponent implements OnInit {
 
   constructor(private jobService: JobService, private router: Router) { }
 
+  
+
   ngOnInit(): void {
     this.loadJobs();
   }
@@ -43,13 +45,18 @@ export class AdminComponent implements OnInit {
 
   updateJob(): void {
     if (this.editingJob) {
-      this.jobService.updateJob(this.editingJob.id, this.editingJob).subscribe(updatedJob => {
-        const index = this.jobs.findIndex(job => job.id === updatedJob.id);
-        if (index !== -1) {
-          this.jobs[index] = updatedJob;
+      this.jobService.updateJob(this.editingJob.id, this.editingJob).subscribe(
+        updatedJob => {
+          const index = this.jobs.findIndex(job => job.id === updatedJob.id);
+          if (index !== -1) {
+            this.jobs[index] = updatedJob;
+          }
+          this.editingJob = null;
+        },
+        error => {
+          console.error('Erro ao atualizar o job:', error);
         }
-        this.editingJob = null;
-      });
+      );
     }
   }
 
@@ -58,9 +65,14 @@ export class AdminComponent implements OnInit {
   }
 
   deleteJob(id: number): void {
-    this.jobService.deleteJob(id).subscribe(() => {
-      this.jobs = this.jobs.filter(job => job.id !== id);
-    });
+    this.jobService.deleteJob(id).subscribe(
+      () => {
+        this.jobs = this.jobs.filter(job => job.id !== id);
+      },
+      error => {
+        console.error('Erro ao deletar o job:', error);
+      }
+    );
   }
 
   logout(): void {

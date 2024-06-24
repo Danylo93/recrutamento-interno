@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withFetch, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importe FormsModule e ReactiveFormsModule
 import { JobService } from './job.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,19 +19,12 @@ import { RoleGuard } from './admin/role.guard';
 import { CandidatePanelComponent } from './candidate-panel/candidate-panel.component';
 import { HeaderComponent } from './header/header.component';
 import { ApplyJobComponent } from './job-apply/apply-job.component';
-
+import { TokenInterceptor } from './admin/token.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
     JobDetailComponent,
-    AdminComponent,
-    CandidatePanelComponent,
     AccessDeniedComponent,
-    AdminComponent, 
-    ApplyJobComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,14 +33,17 @@ import { ApplyJobComponent } from './job-apply/apply-job.component';
     RouterModule,
     LoginComponent,
     AppRoutingModule,
-    HttpClient,
+    HttpClientModule,
     HeaderComponent
   ],
   exports: [
     HeaderComponent,
 ],
   providers: [  JobService, ApplicationService ,  provideHttpClient(withFetch()),
-    AuthGuard, AuthService, RoleGuard],
-  bootstrap: [AppComponent,HeaderComponent, LoginComponent ]
+    AuthGuard, AuthService, RoleGuard, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }]
 })
 export class AppModule {}

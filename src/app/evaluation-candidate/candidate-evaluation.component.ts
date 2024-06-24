@@ -1,42 +1,45 @@
-// candidate-evaluation.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { EvaluationService } from './evaluation.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FeedbackModalComponent } from "./feedback-modal.component";
+import { FeedbackModalComponent } from './feedback-modal.component';
 
 @Component({
-    standalone: true,
-    selector: 'app-candidate-evaluation',
-    templateUrl: './candidate-evaluation.component.html',
-    styleUrls: ['./candidate-evaluation.component.css'],
-    imports: [FormsModule, CommonModule, FeedbackModalComponent]
+  selector: 'app-candidate-evaluation',
+  templateUrl: './candidate-evaluation.component.html',
+  styleUrls: ['./candidate-evaluation.component.css'],
+  standalone: true,
+  imports: [FormsModule, CommonModule, FeedbackModalComponent]
 })
 export class CandidateEvaluationComponent implements OnInit {
   candidates: any[] = []; // Array para armazenar os candidatos
   filters = { requirement: '', experience: '' }; // Filtros de requisitos e experiência
-  showModal: boolean = false; // Controla a exibição do modal
+  showModal = false; // Controla a exibição do modal
   selectedCandidate: any; // Candidato selecionado para avaliação
+  token: string = ''; // Variável para armazenar o token
 
   constructor(private evaluationService: EvaluationService, private router: Router) { }
 
   ngOnInit(): void {
-    // Carregar todos os candidatos inicialmente
+    this.token = localStorage.getItem('token') || ''; // Obter token do localStorage
     this.loadCandidates();
   }
 
   loadCandidates(): void {
-    this.evaluationService.getCandidates(0, this.filters).subscribe(data => {
-      this.candidates = data;
-    });
+    this.evaluationService.getCandidates(1, this.filters, this.token).subscribe(
+      candidates => {
+        this.candidates = candidates;
+        console.log('Candidatos carregados:', this.candidates);
+      },
+      error => {
+        console.error('Erro ao carregar candidatos:', error);
+      }
+    );
   }
 
-  applyFilters(): void {
-    this.evaluationService.getCandidates(0, this.filters).subscribe(data => {
-      this.candidates = data;
-    });
+  applyFilter(): void {
+    this.loadCandidates(); // Recarregar candidatos com o novo filtro
   }
 
   evaluateCandidate(candidate: any): void {

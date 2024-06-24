@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobService } from '../job.service';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   imports: [CommonModule],
@@ -22,7 +22,6 @@ export class JobListComponent implements OnInit {
   }
 
   applyForJob(id: number): void {
-    // Navega para o ApplyJobComponent com o ID da vaga como parâmetro
     this.router.navigate(['/apply', id]);
   }
 
