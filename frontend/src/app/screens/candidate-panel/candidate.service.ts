@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidateService {
-  private baseUrl = 'http://localhost:8081/api'; // Base URL do seu backend
-
+  
+  private baseUrl = `${environment.apiUrl}`;
   constructor(private http: HttpClient) { }
 
   private getHeaders(): HttpHeaders {

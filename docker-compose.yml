@@ -26,6 +26,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: recruitment_db
+      MYSQL_ROOT_HOST: '%'
+    command: --default-authentication-plugin=caching_sha2_password
     ports:
       - "3306:3306"
     volumes:

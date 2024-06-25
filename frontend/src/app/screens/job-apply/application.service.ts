@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationService {
-  private baseUrl = 'http://localhost:8081/api/applications'; // URL base da sua API
-
+  private baseUrl = `${environment.apiUrl}/applications`;
+ 
   constructor(private http: HttpClient) { }
 
   // Método para obter aplicações por job ID

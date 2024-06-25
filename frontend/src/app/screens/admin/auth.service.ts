@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private isAuthenticated = false;
   private userRole: string = '';
-  private apiUrl = 'http://localhost:8081/api/auth'; // Base URL dos endpoints de autenticação
+  private baseUrl = `${environment.apiUrl}/auth`;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -31,7 +32,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { username, password })
+    return this.http.post<any>(`${this.baseUrl}/login`, { username, password })
       .pipe(
         map(response => {
           if (response && response.token) {
@@ -70,7 +71,7 @@ export class AuthService {
   }
 
   createUser(username: string, password: string, role: string): Observable<boolean> {
-    return this.http.post<any>(`${this.apiUrl}/register`, { username, password, role })
+    return this.http.post<any>(`${this.baseUrl}/register`, { username, password, role })
       .pipe(
         map(response => {
           return response && response.username;
@@ -96,7 +97,7 @@ export class AuthService {
   }
 
   fetchUserRole(): Observable<string> {
-    return this.http.get<any>(`${this.apiUrl}/roles`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/roles`).pipe(
       map(response => {
         const roles = response.role; // Verifique a estrutura da resposta para obter as roles corretamente
         this.userRole = roles.includes('ADMIN') ? 'ADMIN' : 'USER';
@@ -106,7 +107,7 @@ export class AuthService {
   }
 
   fetchUsersAll(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/users/all`, { headers: this.getHeaders() });
+    return this.http.get<any[]>(`${this.baseUrl}/users/all`, { headers: this.getHeaders() });
   }
 
 
