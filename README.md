@@ -36,7 +36,7 @@
 <h2 id="technologies">💻 Technologies</h2>
 
 ### Frontend
-- Angular 18
+- Angular
 - Componentes e serviços para interação com o usuário
 
 ### Backend
@@ -99,7 +99,7 @@ Backend:
 cd recrutamento-interno
 cd backend
 ```
-2. Configure o application.properties com as configurações do banco de dados.
+2. Configure o application.properties com as configurações do seu banco de dados.
 
 
 3. Inicie a aplicação:
