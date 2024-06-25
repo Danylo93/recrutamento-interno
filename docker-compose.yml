@@ -4,7 +4,7 @@ services:
     build:
       context: ./backend
     ports:
-      - "8080:8080"
+      - "8083:8083"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/recruitment_db
       SPRING_DATASOURCE_USERNAME: root
