@@ -68,16 +68,6 @@ Como clonar seu projeto:
 git clone https://github.com/Danylo93/recrutamento-interno.git
 ```
 
-<h3>Configuração e Execução do Projeto com Docker</h3>
-
-
-```bash
-cd recrutamento-interno
-docker-compose up -d
-```
-
-<h5>Obs: Caso não tenha o Docker Instalado, siga os passoas abaixo:</h5>
-
 <h3>Configuração e Instalação sem Docker</h3>
 
 Como iniciar seu projeto: 
