@@ -17,7 +17,6 @@
  <a href="#tech">Technologies</a> • 
  <a href="#started">Getting Started</a> • 
   <a href="#colab">Collaborators</a> •
- <a href="#contribute">Contribute</a>
 </p>
 
 <p align="center">
@@ -71,11 +70,41 @@ git clone https://github.com/Danylo93/recrutamento-interno.git
 
 <h3>Configuração e Instalação</h3>
 
-Como iniciar seu projeto
+Como iniciar seu projeto: 
+
+Frontend:
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/Danylo93/recrutamento-interno.git
+   cd recrutamento-interno
+   ```
+
+2. Instale as dependências:
+   ```bash
+   npm install --force
+   ```
+
+3. Inicie o servidor de desenvolvimento do Angular:
+   ```bash
+   ng serve
+   ```
+
+Backend:
+
+1. Abra a pasta do backend:
 
 ```bash
 cd recrutamento-interno
-docker compose up -d
+cd backend
+```
+2. Configure o application.properties com as configurações do banco de dados.
+
+
+3. Inicie a aplicação:
+```bash
+mvn spring-boot:run
 ```
 
 
